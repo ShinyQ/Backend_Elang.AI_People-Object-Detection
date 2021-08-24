@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Response
 from torchvision import transforms
 from pydantic import BaseModel
-from .helper import api
-from .model import object
+from helper import api
+from model import object
 
 app = FastAPI()
 
@@ -27,6 +27,7 @@ def get_prediction(d: Input, response: Response):
 
     pred = model([img])
     pred_class = [COCO_INSTANCE_CATEGORY_NAMES[i] for i in list(pred[0]['labels'].numpy())]
+
     pred_boxes = [
         [{'x1': float(i[0]), 'y1': float(i[1])}, {'x2': float(i[2]), 'y2': float(i[3])}]
         for i in list(pred[0]['boxes'].detach().numpy())
