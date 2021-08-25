@@ -49,7 +49,7 @@ def test_read_main():
 
 
 def test_post_str_predict():
-    with open("image/dog_cat.JPG", "rb") as image_file:
+    with open("./image/dog_cat.JPG", "rb") as image_file:
         base64str = base64.b64encode(image_file.read()).decode("utf-8")
 
     response = client.post(
@@ -62,7 +62,7 @@ def test_post_str_predict():
 
 
 def test_post_image_predict():
-    files = {'file': open('image/dog_cat.JPG', 'rb')}
+    files = {'file': open('./image/dog_cat.JPG', 'rb')}
 
     response = client.post(
         "/predict_image",

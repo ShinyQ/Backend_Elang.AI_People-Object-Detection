@@ -33,11 +33,7 @@ def get_prediction(d: Input, response: Response):
         for i in list(pred[0]['boxes'].detach().numpy())
     ]
 
-    pred_score = list(pred[0]['scores'].detach().numpy())
 
-    pred_t = [pred_score.index(x) for x in pred_score if x > 0.5][-1]
-    pred_boxes = pred_boxes[:pred_t + 1]
-    pred_class = pred_class[:pred_t + 1]
 
     return api.builder({'boxes': pred_boxes, 'classes': pred_class}, response.status_code)
 
@@ -51,6 +47,8 @@ def get_prediction_image(file: UploadFile = File(...)):
     img = transform(img)
 
     pred = model([img])
+
+    print(pred)
     pred_class = [COCO_INSTANCE_CATEGORY_NAMES[i] for i in list(pred[0]['labels'].numpy())]
 
     pred_boxes = [

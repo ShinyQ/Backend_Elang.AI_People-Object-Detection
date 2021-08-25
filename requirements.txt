@@ -2,3 +2,5 @@ fastapi
 uvicorn
 pydantic
 pillow
+torchvision
+pytest
