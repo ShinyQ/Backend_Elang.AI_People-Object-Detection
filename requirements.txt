@@ -4,3 +4,4 @@ pydantic
 pillow
 torchvision
 pytest
+python-multipart

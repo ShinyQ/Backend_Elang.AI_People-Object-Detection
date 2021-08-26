@@ -12,7 +12,7 @@ with open("../app/image/street3.jpg", "rb") as image_file:
 
 payload = json.dumps({"base64str": base64str})
 
-response = requests.post("http://127.0.0.1:8000/predict", data=payload)
+response = requests.post("http://127.0.0.1:80/predict", data=payload)
 data_dict = response.json()
 
 print(data_dict)
