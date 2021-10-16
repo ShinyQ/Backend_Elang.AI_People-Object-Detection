@@ -30,14 +30,12 @@ def get_prediction_image(file: UploadFile = File(...)):
     img = Image.open(file.file)
     pred_boxes, pred_class = object.model_prediction(img)
 
-    del_arr = []
+    final_box = []
+    final_pred = []
 
     for i, val in enumerate(pred_class):
-        if val != "person":
-            del_arr.append(i)
+        if val == "person":
+            final_box.append(pred_boxes[i])
+            final_pred.append(val)
 
-    for index in sorted(del_arr, reverse=True):
-        del pred_boxes[index]
-        del pred_class[index]
-
-    return api.builder({'boxes': pred_boxes, 'classes': pred_class}, 200)
+    return api.builder({'boxes': final_box, 'classes': final_pred}, 200)
