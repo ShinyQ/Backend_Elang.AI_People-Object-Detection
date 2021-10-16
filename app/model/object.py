@@ -7,7 +7,7 @@ from PIL import Image
 
 
 def initialize():
-    model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
+    model = torchvision.models.detection.fasterrcnn_mobilenet_v3_large_fpn(pretrained=True)
     COCO_INSTANCE_CATEGORY_NAMES = [
         '__background__', 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus',
         'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'N/A', 'stop sign',
