@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from helper import api
 from model import object
 from PIL import Image
+import numpy as np
 
 app = FastAPI()
 
@@ -28,5 +29,15 @@ def get_prediction(d: Input, response: Response):
 def get_prediction_image(file: UploadFile = File(...)):
     img = Image.open(file.file)
     pred_boxes, pred_class = object.model_prediction(img)
+    print(pred_class)
+    del_arr = []
+
+    for i, val in enumerate(pred_class):
+        if val != "person":
+            del_arr.append(i)
+
+    for index in sorted(del_arr, reverse=True):
+        del pred_boxes[index]
+        del pred_class[index]
 
     return api.builder({'boxes': pred_boxes, 'classes': pred_class}, 200)
