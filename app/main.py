@@ -29,7 +29,7 @@ def get_prediction(d: Input, response: Response):
 def get_prediction_image(file: UploadFile = File(...)):
     img = Image.open(file.file)
     pred_boxes, pred_class = object.model_prediction(img)
-    print(pred_class)
+
     del_arr = []
 
     for i, val in enumerate(pred_class):

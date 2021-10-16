@@ -4,7 +4,6 @@ import io
 
 from torchvision import transforms
 from PIL import Image
-from torch import nn
 
 
 def initialize():
